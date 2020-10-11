@@ -22,7 +22,7 @@ int main()
 
     std::vector<cv::String> fn;
     cv::glob("Data/*.*", fn, false);
-    size_t count = fn.size(); //number of png files in images folder
+    size_t count = fn.size(); //number of files in images folder
     std::cout << fn.size() << " images found" << std::endl;
 
 
@@ -34,22 +34,12 @@ int main()
 
         heighttoadd = 0;
         if (img.size().height % tilesize != 0) {
-            if ((img.size().height % tilesize) > (tilesize / 2)) {
-                heighttoadd = tilesize % (img.size().height % tilesize);
-            }
-            else {
-                heighttoadd = tilesize - (img.size().height % tilesize);
-            }
+            heighttoadd = tilesize - (img.size().height % tilesize);
         };
 
         widthtoadd = 0;
         if (img.size().width % tilesize != 0) {
-            if ((img.size().width % tilesize) > (tilesize / 2)) {
-                widthtoadd = tilesize % (img.size().width % tilesize);
-            }
-            else {
-                widthtoadd = tilesize - (img.size().width % tilesize);
-            }
+            widthtoadd = tilesize - (img.size().width % tilesize);
         };
 
         cv::copyMakeBorder(img, dst, 0, heighttoadd, 0, widthtoadd, borderType, (0, 0, 0));
